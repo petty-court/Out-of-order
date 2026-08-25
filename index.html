@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OUT OF ORDER — The Internet's Court of Petty Disputes</title>
+<meta name="description" content="File suit over life's smallest injustices. Real verdicts, dramatic rulings, engraved verdict cards. $3 per filing.">
+<meta property="og:title" content="OUT OF ORDER — Sue someone for $3">
+<meta property="og:description" content="The internet's court of petty disputes. Judge verdicts FREE, the public jury costs $5. The accused pays $3 to respond. Justice, but make it petty.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/judge-avatar.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
+<style>
+:root{
+  --paper:#f2ead8; --paper2:#e9dfc8; --ink:#1b1712; --ink2:#3a332a;
+  --gold:#b8860b; --gold2:#d4af37; --brass:#8a6d1f;
+  --forest:#1f3d2b; --forest2:#285238; --red:#a5271f;
+  --serif:Georgia,'Iowan Old Style','Times New Roman',serif;
+  --mono:'Courier New',Courier,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+::selection{background:var(--gold2);color:var(--ink)}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+.eyebrow{font-family:var(--mono);letter-spacing:.32em;text-transform:uppercase;font-size:11px;color:var(--brass)}
+h1,h2,h3{font-weight:700;line-height:1.04}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:14px;padding:16px 26px;border:2px solid var(--ink);cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .15s;background:var(--ink);color:var(--paper)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--gold)}
+.btn.gold{background:var(--gold);border-color:var(--brass);color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{box-shadow:4px 4px 0 var(--ink)}
+.sect{padding:92px 0}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.rv.on{opacity:1;transform:none}
+
+/* ── ticker ── */
+.ticker{background:var(--ink);color:var(--gold2);font-family:var(--mono);font-size:12px;letter-spacing:.14em;padding:9px 0;overflow:hidden;white-space:nowrap;position:relative}
+.ticker .tk{display:inline-block;animation:tick 32s linear infinite}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── nav ── */
+nav{position:sticky;top:0;z-index:50;background:rgba(242,234,216,.94);backdrop-filter:blur(6px);border-bottom:2px solid var(--ink)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none;font-weight:900;letter-spacing:.02em;font-size:20px}
+.logo .scales{width:34px;height:34px;border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center;background:var(--gold2);font-size:16px}
+.nlinks{display:flex;gap:26px;align-items:center;font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+.nlinks a{text-decoration:none;position:relative}
+.nlinks a:hover{color:var(--gold)}
+.nlinks .cta{background:var(--ink);color:var(--paper);padding:10px 18px;border:2px solid var(--ink)}
+.nlinks .cta:hover{background:var(--gold);color:var(--ink)}
+@media(max-width:860px){.nlinks a:not(.cta){display:none}}
+
+/* ── hero ── */
+.hero{position:relative;padding:86px 0 76px;background:
+  radial-gradient(1100px 500px at 85% -10%, rgba(212,175,55,.22), transparent 60%),
+  linear-gradient(180deg,var(--paper),var(--paper2))}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(46px,7vw,86px);text-transform:uppercase;letter-spacing:-.01em;margin:18px 0 20px}
+.hero h1 .g{color:var(--gold);font-style:italic}
+.hero p.sub{font-size:18px;line-height:1.65;color:var(--ink2);max-width:520px;margin-bottom:30px}
+.hero .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.trust{display:flex;gap:22px;flex-wrap:wrap;margin-top:34px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--ink2)}
+.trust b{color:var(--ink)}
+.judgebox{position:relative;justify-self:center}
+.medal{width:min(340px,72vw);aspect-ratio:1;border-radius:50%;padding:14px;background:conic-gradient(var(--gold2),#f6e27a,var(--brass),var(--gold2),var(--brass),var(--gold2));box-shadow:0 30px 60px -18px rgba(27,23,18,.5);position:relative}
+.medal img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:6px solid var(--ink);filter:sepia(.25) contrast(1.05)}
+.ring{position:absolute;inset:-34px;animation:spin 26s linear infinite;pointer-events:none}
+.ring text{font-family:var(--mono);font-size:12.5px;letter-spacing:.42em;fill:var(--brass);text-transform:uppercase}
+@keyframes spin{to{transform:rotate(360deg)}}
+.plaque{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--gold2);font-family:var(--mono);font-size:11px;letter-spacing:.24em;padding:9px 18px;white-space:nowrap;border:1px solid var(--gold)}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr}.judgebox{margin-top:20px}}
+
+/* ── verdict broadcast ── */
+.cast{background:var(--forest);color:var(--paper);position:relative}
+.cast::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0 26px,rgba(212,175,55,.05) 26px 27px);pointer-events:none}
+.cast .eyebrow{color:var(--gold2)}
+.cast h2{color:var(--paper);font-size:clamp(30px,4vw,46px);text-transform:uppercase;margin:14px 0 8px}
+.cast .lede{color:#cfd8cc;max-width:560px;line-height:1.6;margin-bottom:34px}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+.tab{font-family:var(--mono);font-size:12px;letter-spacing:.14em;padding:10px 16px;border:1px solid rgba(242,234,216,.4);color:#cfd8cc;background:transparent;cursor:pointer;text-transform:uppercase}
+.tab.active{background:var(--gold2);color:var(--ink);border-color:var(--gold2);font-weight:700}
+.vframe{background:var(--ink);border:2px solid var(--gold2);box-shadow:0 40px 80px -30px rgba(0,0,0,.6);max-width:880px}
+.vhead{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid rgba(212,175,55,.35);font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--gold2);text-transform:uppercase;flex-wrap:wrap}
+.live{display:inline-flex;align-items:center;gap:7px}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--red);display:inline-block;animation:pulse 1.4s infinite}
+@keyframes pulse{50%{opacity:.25}}
+.vstage{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:26px 24px}
+@media(max-width:640px){.vstage{grid-template-columns:1fr}}
+.exhibit{position:relative;width:100%;max-width:220px}
+.exhibit .ph{aspect-ratio:4/5;overflow:hidden;border:6px solid #2b251c;outline:1px solid var(--brass);background:#111}
+.exhibit img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.18) sepia(.32) brightness(.92)}
+.exhibit .tag{background:var(--paper);color:var(--ink);font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-align:center;padding:7px 4px;margin-top:8px;text-transform:uppercase}
+.vbody .vcase{font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--gold2);text-transform:uppercase;margin-bottom:10px}
+.vbody h3{color:var(--paper);font-size:clamp(20px,2.6vw,27px);line-height:1.25;margin-bottom:16px}
+.verdict-txt{font-family:var(--mono);font-size:14px;line-height:1.75;color:#e6dfc8;min-height:150px;white-space:pre-wrap}
+.verdict-txt .cur{display:inline-block;width:9px;height:16px;background:var(--gold2);vertical-align:-2px;animation:pulse 1s infinite}
+.vfoot{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:18px 24px;border-top:1px solid rgba(212,175,55,.35)}
+.chipfor{background:var(--gold2);color:var(--ink);font-weight:700;font-family:var(--mono);letter-spacing:.18em;font-size:11px;padding:8px 14px;text-transform:uppercase}
+.replay{background:transparent;border:1px solid var(--gold2);color:var(--gold2);font-family:var(--mono);font-size:11px;letter-spacing:.2em;padding:9px 14px;cursor:pointer;text-transform:uppercase}
+.replay:hover{background:var(--gold2);color:var(--ink)}
+.prog{flex:1;height:4px;background:rgba(242,234,216,.18);min-width:90px}
+.prog i{display:block;height:100%;width:0;background:var(--gold2)}
+.appeal-link{color:#cfd8cc;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.appeal-link:hover{color:var(--gold2)}
+
+/* ── docket ── */
+.docket h2{font-size:clamp(30px,4vw,46px);text-transform:uppercase;margin:14px 0 8px}
+.docket .lede{color:var(--ink2);max-width:560px;line-height:1.6;margin-bottom:36px}
+.crow{display:grid;grid-template-columns:64px 1fr auto auto;gap:18px;align-items:center;padding:16px 14px;border-bottom:1.5px dashed rgba(27,23,18,.3);transition:background .15s}
+.crow:hover{background:rgba(212,175,55,.12)}
+.cface{width:64px;height:64px;border-radius:50%;overflow:hidden;border:3px solid var(--brass);background:#d8cdb2}
+.cface img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15) sepia(.3)}
+.cface.init{display:grid;place-items:center;font-family:var(--mono);font-weight:700;color:var(--brass);font-size:19px}
+.ctitle b{display:block;font-size:16px;letter-spacing:.03em}
+.ctitle span{font-family:var(--mono);font-size:12px;color:var(--ink2)}
+.cstatus{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;padding:7px 12px;border:1.5px solid;white-space:nowrap;text-transform:uppercase}
+.st-out{color:var(--forest);border-color:var(--forest);background:rgba(31,61,43,.08)}
+.st-del{color:var(--brass);border-color:var(--brass)}
+.st-app{color:var(--red);border-color:var(--red)}
+.st-srv{color:var(--ink2);border-color:var(--ink2)}
+.cfee{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink2);white-space:nowrap}
+@media(max-width:640px){.cfee{display:none}.crow{grid-template-columns:52px 1fr auto}}
+
+/* ── studio ── */
+.studio{background:var(--ink);color:var(--paper)}
+.studio .eyebrow{color:var(--gold2)}
+.studio h2{color:var(--paper);font-size:clamp(30px,4vw,46px);text-transform:uppercase;margin:14px 0 8px}
+.studio .lede{color:#cfc4a6;max-width:600px;line-height:1.65;margin-bottom:38px}
+.stgrid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
+@media(max-width:860px){.stgrid{grid-template-columns:1fr}}
+.upzone{border:2px dashed rgba(212,175,55,.5);padding:38px 26px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s}
+.upzone:hover{border-color:var(--gold2);background:rgba(212,175,55,.06)}
+.upzone .big{font-size:40px;margin-bottom:10px}
+.upzone p{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;color:#cfc4a6;line-height:1.8;text-transform:uppercase}
+.upzone input{display:none}
+.stagecard{background:#141009;border:1.5px solid var(--brass);padding:22px;text-align:center}
+.stagecard .ph{aspect-ratio:1;overflow:hidden;border:5px solid #2b251c;outline:1px solid var(--brass);position:relative}
+.stagecard img{width:100%;height:100%;object-fit:cover}
+.stagecard img.county{filter:grayscale(1) contrast(1.18) sepia(.32) brightness(.92)}
+.stagecard img.federal{filter:sepia(.55) hue-rotate(-8deg) saturate(1.5) contrast(1.12) brightness(1.03)}
+.sealtag{position:absolute;bottom:12px;right:12px;width:58px;height:58px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f6e27a,var(--gold) 55%,var(--brass));display:grid;place-items:center;font-size:22px;border:2px solid var(--ink);box-shadow:0 6px 14px rgba(0,0,0,.5)}
+.stname{font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--gold2);margin-top:14px;text-transform:uppercase}
+.stverdict{font-size:16.5px;line-height:1.7;color:#efe6cf;margin:12px 0 16px;min-height:84px;font-style:italic}
+.stbtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.minibtn{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:11px 16px;cursor:pointer;border:1.5px solid var(--gold2);background:transparent;color:var(--gold2)}
+.minibtn:hover{background:var(--gold2);color:var(--ink)}
+.minibtn.solid{background:var(--gold2);color:var(--ink)}
+.modepill{display:inline-flex;border:1.5px solid var(--brass);margin-bottom:16px}
+.modepill button{font-family:var(--mono);font-size:11px;letter-spacing:.2em;padding:9px 18px;background:transparent;color:#cfc4a6;border:0;cursor:pointer;text-transform:uppercase}
+.modepill button.active{background:var(--gold2);color:var(--ink);font-weight:700}
+.free-tag{font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--gold2);text-transform:uppercase;border:1px solid var(--brass);display:inline-block;padding:8px 14px;margin-bottom:14px}
+
+/* ── pricing ── */
+.pricing h2{font-size:clamp(30px,4vw,46px);text-transform:uppercase;margin:14px 0 8px}
+.pricing .lede{color:var(--ink2);max-width:560px;line-height:1.6;margin-bottom:40px}
+.ptiers{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:860px){.ptiers{grid-template-columns:1fr}}
+.tier{background:var(--paper2);border:2px solid var(--ink);padding:30px 26px;position:relative;transition:transform .15s,box-shadow .15s}
+.tier:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--gold)}
+.tier.hot{background:var(--ink);color:var(--paper);border-color:var(--gold2)}
+.tier .flag{position:absolute;top:-13px;right:18px;background:var(--gold2);color:var(--ink);font-family:var(--mono);font-size:10px;letter-spacing:.2em;font-weight:700;padding:6px 12px;text-transform:uppercase}
+.tier h3{font-size:22px;text-transform:uppercase;margin:10px 0 4px}
+.tier .price{font-size:46px;font-weight:900;margin:6px 0 14px}
+.tier .price small{font-size:15px;font-weight:400}
+.tier ul{list-style:none;margin:0 0 22px}
+.tier li{padding:8px 0 8px 26px;position:relative;font-size:14.5px;line-height:1.5;border-bottom:1px dashed rgba(122,108,72,.4)}
+.tier li::before{content:"⚖";position:absolute;left:0;top:8px;font-size:13px}
+.tier .btn{width:100%;justify-content:center}
+.tier.hot .btn{background:var(--gold2);border-color:var(--gold2);color:var(--ink)}
+
+/* ── how ── */
+.how{background:var(--paper2)}
+.how h2{font-size:clamp(30px,4vw,46px);text-transform:uppercase;margin:14px 0 34px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media(max-width:860px){.steps{grid-template-columns:repeat(2,1fr)}}
+.step{border-top:3px solid var(--ink);padding-top:16px}
+.step .n{font-size:42px;font-weight:900;color:var(--gold);font-style:italic}
+.step b{display:block;margin:8px 0 6px;font-size:16.5px;text-transform:uppercase;letter-spacing:.04em}
+.step p{font-size:14px;line-height:1.6;color:var(--ink2)}
+
+/* ── famous ── */
+.famous{padding:64px 0;overflow:hidden;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.famous .eyebrow{display:block;text-align:center;margin-bottom:26px}
+.mq{overflow:hidden;white-space:nowrap}
+.mq .mqin{display:inline-flex;gap:18px;animation:tick 40s linear infinite;padding-left:18px}
+.mq:hover .mqin{animation-play-state:paused}
+.rcard{display:inline-block;white-space:normal;width:280px;background:var(--paper2);border:1.5px solid var(--brass);padding:18px;vertical-align:top}
+.rcard .rn{font-family:var(--mono);font-size:10px;letter-spacing:.26em;color:var(--brass);text-transform:uppercase}
+.rcard b{display:block;margin:7px 0 6px;font-size:15px}
+.rcard p{font-size:12.5px;line-height:1.55;color:var(--ink2);font-style:italic}
+
+/* ── merch ── */
+.merch h2{font-size:clamp(28px,4vw,42px);text-transform:uppercase;margin:14px 0 30px}
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:860px){.mgrid{grid-template-columns:1fr}}
+.mitem{border:2px solid var(--ink);padding:26px;background:linear-gradient(160deg,var(--paper2),var(--paper));position:relative}
+.mitem .mt{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--brass);text-transform:uppercase}
+.mitem h3{font-size:26px;text-transform:uppercase;margin:10px 0 8px}
+.mitem p{font-size:13.5px;line-height:1.55;color:var(--ink2);margin-bottom:16px}
+.mitem .bp{font-size:22px;font-weight:900}
+
+/* ── faq ── */
+.faq h2{font-size:clamp(28px,4vw,42px);text-transform:uppercase;margin:14px 0 26px}
+details{border-bottom:1.5px solid rgba(27,23,18,.3);padding:18px 4px}
+summary{cursor:pointer;font-weight:700;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:14px;align-items:center}
+summary::after{content:"+";font-size:24px;color:var(--gold);font-family:var(--mono)}
+details[open] summary::after{content:"–"}
+details p{padding:12px 0 4px;line-height:1.7;color:var(--ink2);font-size:15px;max-width:760px}
+
+/* ── footer / final ── */
+.final{background:var(--ink);color:var(--paper);text-align:center;padding:96px 0}
+.final h2{color:var(--paper);font-size:clamp(34px,5vw,60px);text-transform:uppercase;margin:12px 0 18px}
+.final .g{color:var(--gold2);font-style:italic}
+.final p{color:#cfc4a6;max-width:520px;margin:0 auto 30px;line-height:1.7}
+footer{background:var(--ink);color:#8f8468;font-family:var(--mono);font-size:11px;letter-spacing:.12em;padding:26px 0 40px;border-top:1px solid rgba(212,175,55,.25)}
+footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+footer a{color:#cfc4a6;text-decoration:none}
+footer a:hover{color:var(--gold2)}
+
+/* ── modal ── */
+.mback{position:fixed;inset:0;background:rgba(18,14,8,.78);z-index:90;display:none;align-items:flex-start;justify-content:center;padding:4vh 16px;overflow-y:auto}
+.mback.open{display:flex}
+.modal{background:var(--paper);border:2px solid var(--ink);box-shadow:10px 10px 0 var(--gold);max-width:640px;width:100%;padding:34px 32px;position:relative;margin-bottom:6vh}
+.modal .x{position:absolute;top:14px;right:16px;background:none;border:0;font-size:24px;cursor:pointer;font-family:var(--mono)}
+.mh{font-size:26px;text-transform:uppercase;margin:8px 0 4px}
+.msub{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--ink2);margin-bottom:22px;text-transform:uppercase}
+.fld{margin-bottom:16px}
+.fld label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);margin-bottom:7px}
+.fld input,.fld textarea,.fld select{width:100%;border:1.5px solid var(--ink);background:#fffdf6;padding:12px 13px;font-family:var(--serif);font-size:15px;color:var(--ink)}
+.fld textarea{min-height:80px;resize:vertical}
+.optgrid{display:grid;gap:10px;margin-bottom:18px}
+.opt{border:1.5px solid var(--ink);padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center;background:#fffdf6}
+.opt.sel{background:var(--ink);color:var(--paper)}
+.opt.sel .op{color:var(--gold2)}
+.opt b{font-size:15px;text-transform:uppercase;letter-spacing:.03em}
+.opt span{font-size:12.5px;opacity:.85;display:block;margin-top:3px;line-height:1.45}
+.opt .op{font-family:var(--mono);font-weight:700;white-space:nowrap}
+.mnav{display:flex;justify-content:space-between;gap:12px;margin-top:8px}
+.feed{margin:16px 0;padding:13px 15px;background:var(--paper2);border:1.5px dashed var(--brass);font-family:var(--mono);font-size:12px;color:var(--ink2);min-height:44px;letter-spacing:.02em;line-height:1.5}
+.sumrow{display:flex;justify-content:space-between;font-family:var(--mono);font-size:13px;padding:8px 0;border-bottom:1px dashed rgba(27,23,18,.3)}
+.sumrow.total{font-weight:700;font-size:16px;border-bottom:0}
+.confirm{text-align:center;padding:10px 0}
+.confirm .seal{width:92px;height:92px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f6e27a,var(--gold) 55%,var(--brass));display:grid;place-items:center;font-size:36px;margin:0 auto 18px;border:3px solid var(--ink);box-shadow:0 10px 24px rgba(0,0,0,.35)}
+.confirm h3{font-size:24px;text-transform:uppercase;margin-bottom:8px}
+.confirm p{line-height:1.7;color:var(--ink2);font-size:15px;margin-bottom:18px}
+.caselink{font-family:var(--mono);background:#fffdf6;border:1.5px dashed var(--brass);padding:11px 14px;font-size:13px;margin-bottom:16px;letter-spacing:.06em;word-break:break-all}
+
+/* ── sticky cta / confetti ── */
+.sticky{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:var(--paper);display:none;justify-content:space-between;align-items:center;padding:12px 18px;z-index:60;border-top:2px solid var(--gold2)}
+.sticky .b{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.sticky .btn{padding:11px 18px;font-size:12px}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:200;display:none}
+@media(max-width:760px){.sticky{}}
+@media(min-width:761px){.sticky{max-width:520px;left:auto;right:18px;bottom:18px;border:2px solid var(--gold2)}}
+</style>
+</head>
+<body>
+
+<div class="ticker"><span class="tk" id="tickerTxt"></span></div>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="scales">⚖</span>OUT&nbsp;OF&nbsp;ORDER</a>
+    <div class="nlinks">
+      <a href="#verdicts">Verdicts</a>
+      <a href="#docket">The Docket</a>
+      <a href="#studio">Courtroom</a>
+      <a href="#filings">Filings</a>
+      <a href="#faq">FAQ</a>
+      <a class="cta" href="#" id="cartLink" style="background:var(--gold2);color:var(--ink);border-color:var(--brass)">Cart · <span id="cartN">0</span></a>
+      <a class="cta" href="#file" data-open-modal>File a Case — $3</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="rv on">
+      <span class="eyebrow">The Honorable Internet, Presiding · Est. 2026</span>
+      <h1> petty.<br>but make<br>it <span class="g">legal.</span></h1>
+      <p class="sub">Out of Order is the internet's court for disputes too small for lawyers and too important to let go. Unpaid Uber fares. Roommate food crimes. "Just one fry" larceny. File for <b>$3</b> — receive a dramatic broadcast verdict within 24 hours, engraved card included.</p>
+      <div class="cta-row">
+        <a class="btn gold" href="#file" data-open-modal>⚖ File a case — $3</a>
+        <button class="btn ghost" id="watchBtn">▶ Watch a verdict</button>
+      </div>
+      <div class="trust">
+        <span><b>★★★★★</b> 4.9/5 — 12,400+ plaintiffs</span>
+        <span><b>13,204</b> cases ruled to date</span>
+        <span>As seen in <b>your group chat</b></span>
+      </div>
+    </div>
+    <div class="judgebox rv on">
+      <div class="medal">
+        <img src="images/judge-avatar.png" alt="Judge Ronald Wapner III" id="judgeImg">
+        <svg class="ring" viewBox="0 0 200 200"><defs><path id="circ" d="M100,100 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"/></defs><text><textPath href="#circ">JUDGE RONALD WAPNER III · PRESIDING · HONESTLY, IT'S AN HONOR ·</textPath></text></svg>
+      </div>
+      <div class="plaque">41 YEARS OF UNQUALIFIED AUTHORITY</div>
+    </div>
+  </div>
+</header>
+
+<!-- BROADCAST VERDICTS -->
+<section class="cast sect" id="verdicts">
+  <div class="wrap">
+    <span class="eyebrow rv">Now ruling · live from chambers</span>
+    <h2 class="rv">Fresh verdicts, broadcast weekly</h2>
+    <p class="lede rv">Real disputes. Real $3 filings. Rulings delivered with the full gravity of a constitutional crisis. Both parties receive the engraved verdict card.</p>
+    <div class="tabs rv" id="tabs"></div>
+    <div class="vframe rv">
+      <div class="vhead">
+        <span class="live"><i></i> <span id="vhCase">CASE #0047</span></span>
+        <span id="vhTitle">THE UBER DISPUTE</span>
+        <span>FILED $3 · RULED IN 41 MIN</span>
+      </div>
+      <div class="vstage">
+        <div class="exhibit">
+          <div class="ph"><img id="vImg" src="images/ryan.jpg" alt="Exhibit A"></div>
+          <div class="tag" id="vTag">EXHIBIT A — THE DEFENDANT</div>
+        </div>
+        <div class="vbody">
+          <div class="vcase" id="vKicker">NOW READING THE VERDICT</div>
+          <h3 id="vHead">NATASHA v. RYAN — the unpaid fare</h3>
+          <div class="verdict-txt" id="vTxt"></div>
+        </div>
+      </div>
+      <div class="vfoot">
+        <span class="chipfor" id="vFor">⚖ For the plaintiff</span>
+        <button class="replay" id="vReplay">▶ Replay the verdict</button>
+        <div class="prog"><i id="vProg"></i></div>
+        <a class="appeal-link" href="#file" data-open-modal>Appeal this ruling — $3 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCKET -->
+<section class="docket sect" id="docket">
+  <div class="wrap">
+    <span class="eyebrow rv">Open to the public · updated by the minute</span>
+    <h2 class="rv">The live docket</h2>
+    <p class="lede rv">Every filing is public record. Watch strangers' friendships get formally adjudicated — then file your own. Pay $3 to pin your case to the top.</p>
+    <div class="rv" id="docketRows"></div>
+  </div>
+</section>
+
+<!-- STUDIO -->
+<section class="studio sect" id="studio">
+  <div class="wrap">
+    <span class="eyebrow rv">Free exhibit processing · no filing required</span>
+    <h2 class="rv">The courtroom studio</h2>
+    <p class="lede rv">Drop in a photo of the accused. Our exhibit department daguerreotypes them, applies the official seal, and issues an instant bench ruling. Share it. Tag them. Justice is contagious.</p>
+    <div class="stgrid">
+      <div class="rv">
+        <label class="upzone" for="upInput">
+          <div class="big">📸</div>
+          <p>Drop the accused's photo here<br>or click to present evidence<br><span style="color:#8f8468">jpg / png · never uploaded anywhere, processed in your browser</span></p>
+          <input type="file" id="upInput" accept="image/*">
+        </label>
+        <div style="height:14px"></div>
+        <div class="fld">
+          <label>Name of the accused</label>
+          <input type="text" id="accName" placeholder="e.g. Kefilwe's roommate" maxlength="28">
+        </div>
+      </div>
+      <div class="rv">
+        <span class="free-tag">⚖ Exhibit #000 — the specimen</span>
+        <div class="modepill">
+          <button class="active" id="mCounty">County Daguerreotype</button>
+          <button id="mFederal">Federal Gild</button>
+        </div>
+        <div class="stagecard">
+          <div class="ph"><img id="stImg" src="images/fries.jpg" alt="Exhibit" class="county"><div class="sealtag">⚖</div></div>
+          <div class="stname" id="stName">EXHIBIT A — EMMA · CAUGHT WITH THE FRY</div>
+          <div class="stverdict" id="stVerdict"></div>
+          <div class="stbtns">
+            <button class="minibtn" id="stReroll">↻ Re-rule</button>
+            <button class="minibtn" id="stCopy">Copy ruling</button>
+            <button class="minibtn solid" id="stFile">Make it official — $3</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing sect" id="filings">
+  <div class="wrap">
+    <span class="eyebrow rv">Fee schedule · non-negotiable</span>
+    <h2 class="rv">Filings &amp; proceedings</h2>
+    <p class="lede rv">Cheaper than the Uber he never paid you back for. Every tier includes service of summons on the defendant by link.</p>
+    <div class="ptiers">
+      <div class="tier rv">
+        <span class="eyebrow">Standard</span>
+        <h3>The Filing</h3>
+        <div class="price">$3 <small>/ case</small></div>
+        <ul>
+          <li>Broadcast judge verdict within 24h — <b>always free</b></li>
+          <li>Engraved verdict card (digital) to both parties</li>
+          <li>Public docket listing — permanent record</li>
+          <li>Defendant formally served; they pay $3 to respond</li>
+        </ul>
+        <button class="btn ghost" data-open-modal data-tier="filing">File now</button>
+      </div>
+      <div class="tier hot rv">
+        <span class="flag">Most popular</span>
+        <span class="eyebrow" style="color:var(--gold2)">Deluxe</span>
+        <h3>Jury Trial</h3>
+        <div class="price">$5 <small>/ case</small></div>
+        <ul>
+          <li>Everything in The Filing</li>
+          <li>The public becomes the jury for a day</li>
+          <li>Vote-by-link tally, broadcast with the verdict</li>
+          <li>24-hour priority ruling &amp; pinned docket slot</li>
+          <li>Loser is mailed a Certificate of Guilt</li>
+        </ul>
+        <button class="btn" data-open-modal data-tier="jury">Seat the jury</button>
+        <p style="margin-top:14px;text-align:center"><a href="vote.html?case=0061" style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--gold2);text-transform:uppercase">→ A jury is out right now — watch / vote</a></p>
+      </div>
+      <div class="tier rv">
+        <span class="eyebrow">Post-verdict</span>
+        <h3>The Machinery</h3>
+        <div class="price">$3+ <small>/ move</small></div>
+        <ul>
+          <li>Defendant response — $3 <i>(they pay to be heard)</i></li>
+          <li>Appeal a ruling — $3 <i>(rarely works, always funny)</i></li>
+          <li>Counter-sue the plaintiff — $3</li>
+          <li>Sponsor the accused's response — +$3 <i>(they can't plead poverty)</i></li>
+          <li>Pin your case atop the docket — $3</li>
+          <li>Extra-judicial merch: GUILTY tees &amp; framed rulings</li>
+        </ul>
+        <button class="btn ghost" data-open-modal data-tier="appeal">Start an appeal</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="how sect" id="how">
+  <div class="wrap">
+    <span class="eyebrow rv">Civil procedure, simplified</span>
+    <h2 class="rv">How justice gets served</h2>
+    <div class="steps">
+      <div class="step rv"><div class="n">01</div><b>File your grievance</b><p>Names, charges, evidence (screenshots encouraged). Two minutes. $3. Pettiness welcome.</p></div>
+      <div class="step rv"><div class="n">02</div><b>Defendant is served</b><p>They receive a summons link. Ignoring it counts as contempt of group chat.</p></div>
+      <div class="step rv"><div class="n">03</div><b>The court rules</b><p>Your case is dramatized, ruled, and broadcast as a voiced verdict video. Usually within 24 hours.</p></div>
+      <div class="step rv"><div class="n">04</div><b>Justice is shared</b><p>Both parties get the engraved verdict card. Loser may appeal ($3) or counter-sue ($3). The machine hums.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAMOUS RULINGS -->
+<section class="famous">
+  <span class="eyebrow">Precedent · landmark rulings of this court</span>
+  <div class="mq"><div class="mqin" id="mqIn"></div></div>
+</section>
+
+<!-- MERCH -->
+<section class="merch sect" id="merch">
+  <div class="wrap">
+    <span class="eyebrow rv">Extra-judicial revenue</span>
+    <h2 class="rv">Justice merch</h2>
+    <div class="mgrid">
+      <div class="mitem rv"><span class="mt">Apparel</span><h3>The GUILTY Tee</h3><p>Court-stamped. Worn by losers of record across 14 friend groups. Ships worldwide, judged everywhere.</p><span class="bp">$24</span> <button class="minibtn" data-add="merch-tee" data-label="GUILTY Tee" data-price="24" style="border-color:var(--ink);color:var(--ink);margin-left:10px">Add to cart</button></div>
+      <div class="mitem rv"><span class="mt">Headwear</span><h3>OBJECTION! Cap</h3><p>For the chronically disagreed-with. Structured brim, unstructured legal standing.</p><span class="bp">$19</span> <button class="minibtn" data-add="merch-cap" data-label="OBJECTION! Cap" data-price="19" style="border-color:var(--ink);color:var(--ink);margin-left:10px">Add to cart</button></div>
+      <div class="mitem rv"><span class="mt">Print</span><h3>Framed Verdict</h3><p>Your ruling, museum-framed. The most passive-aggressive gift legally available without paperwork.</p><span class="bp">$34</span> <button class="minibtn" data-add="merch-frame" data-label="Framed Verdict" data-price="34" style="border-color:var(--ink);color:var(--ink);margin-left:10px">Add to cart</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq sect" id="faq">
+  <div class="wrap">
+    <span class="eyebrow rv">Procedural questions</span>
+    <h2 class="rv">Objections, answered</h2>
+    <details open><summary>Is the verdict legally binding?</summary><p>Legally? No. Socially? Absolutely. A ruling from this court has ended arguments that therapy could not. Carry your engraved verdict card with pride.</p></details>
+    <details><summary>Do I need a photo of the defendant?</summary><p>No — it helps the broadcast department, but name and charges suffice. The defendant may also submit their own defense photo after being served, which roughly doubles the drama.</p></details>
+    <details><summary>How fast do I get my verdict?</summary><p>Judge verdicts are free and ruled within 24 hours (median: 41 minutes). Jury trials take up to 24 hours while the public votes — your jury is the entire internet, empaneled by summons link. Democracy, but pettier.</p></details>
+    <details><summary>Can the loser appeal?</summary><p>Yes — appeals are $3 and succeed approximately never. Counter-suits are also $3 and actively encouraged. This is, frankly, the business model.</p></details>
+    <details><summary>Can I file a case as a gift?</summary><p>Absolutely. File against a friend, gift them the verdict card, then pre-pay $3 for their inevitable appeal. The court salutes your pettiness.</p></details>
+    <details><summary>What if the defendant can't afford to defend themselves?</summary><p>The court anticipated poverty as a legal strategy. At checkout, choose <b>Pay it forward</b>: +$3 covers the accused's response or appeal. Justice waits for no wallet — and now, neither do they.</p></details>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="file">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--gold2)">Court is in session</span>
+    <h2>Someone owes you <span class="g">$3 of justice.</span></h2>
+    <p>File in two minutes. Verdict in 24 hours. Friendship settled forever. The defendant will be served. The docket is watching.</p>
+    <a class="btn gold" href="#" data-open-modal style="font-size:16px;padding:20px 34px">⚖ File your case — $3</a>
+    <p style="margin-top:26px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:#8f8468">PARODY COURT · VERDICTS FOR ENTERTAINMENT &amp; SOCIAL LEVERAGE ONLY · NOT LEGAL ADVICE, OBVIOUSLY</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 OUT OF ORDER BROADCASTING CO. — ALL RULINGS FINAL*</span>
+    <span><a href="#docket">Docket</a> · <a href="#filings">Fees</a> · <a href="#faq">FAQ</a> · <a href="#studio">Studio</a></span>
+    <span>*until appealed for $3</span>
+  </div>
+</footer>
+
+<!-- STICKY CTA -->
+<div class="sticky" id="stickyCta">
+  <span class="b">⚖ Court is in session — 17 filings in the last hour</span>
+  <a class="btn gold" href="#" data-open-modal>File — $3</a>
+</div>
+
+<!-- FILING MODAL -->
+<div class="mback" id="mback">
+  <div class="modal">
+    <button class="x" id="mclose">×</button>
+    <!-- STEP 1 -->
+    <div class="mstep" data-step="1">
+      <span class="eyebrow">Form 7-P · Petty grievance</span>
+      <h3 class="mh">State your case</h3>
+      <p class="msub">Step 1 of 3 — the charges</p>
+      <div class="fld"><label>You (the plaintiff)</label><input id="fPlaintiff" placeholder="e.g. Natasha" maxlength="24"></div>
+      <div class="fld"><label>The defendant</label><input id="fDefendant" placeholder="e.g. Ryan" maxlength="24"></div>
+      <div class="fld"><label>The charge</label>
+        <select id="fCharge">
+          <option>Failure to reimburse (Uber fare class)</option>
+          <option>Food theft, first degree</option>
+          <option>"Just one fry" larceny</option>
+          <option>Chronic lateness with intent</option>
+          <option>Criminal take (movies / music / food)</option>
+          <option>Group-chat misconduct (7-minute voice notes)</option>
+          <option>Consulting the horoscope in bad faith</option>
+          <option>Other heinous pettiness</option>
+        </select>
+      </div>
+      <div class="fld"><label>Evidence / statement of facts</label><textarea id="fFacts" placeholder="Four days. FOUR DAYS, your honor. He said he was 'about to send it'…"></textarea></div>
+      <div class="mnav"><span></span><button class="btn gold" id="toStep2">Proceed →</button></div>
+    </div>
+    <!-- STEP 2 -->
+    <div class="mstep" data-step="2" style="display:none">
+      <span class="eyebrow">Proceedings menu</span>
+      <h3 class="mh">Choose your proceeding</h3>
+      <p class="msub">Step 2 of 3 — venue &amp; pomp</p>
+      <div class="optgrid" id="optGrid">
+        <div class="opt sel" data-price="3" data-label="Standard Filing"><div><b>Sue them — judge verdict FREE</b><span>Broadcast bench verdict + engraved card within 24h</span></div><span class="op">$3</span></div>
+        <div class="opt" data-price="5" data-label="Jury Trial"><div><b>Jury Trial — the public decides</b><span>The internet becomes your jury for a day: vote-by-link, tally broadcast, pinned &amp; prioritized</span></div><span class="op">$5</span></div>
+        <div class="opt" data-price="3" data-label="Make It Famous"><div><b>Make It Famous</b><span>Add-on: pin an existing case to the top of the docket for 24h</span></div><span class="op">$3</span></div>
+      </div>
+      <div class="feed" id="mFeed">★★★★★ “Worth every cent. He paid me back within the hour.” — Lerato K., plaintiff</div>
+      <div class="mnav"><button class="btn ghost" id="back1">← Charges</button><button class="btn gold" id="toStep3">To payment →</button></div>
+    </div>
+    <!-- STEP 3 -->
+    <div class="mstep" data-step="3" style="display:none">
+      <span class="eyebrow">Clerk's window</span>
+      <h3 class="mh">Your cart</h3>
+      <p class="msub">Step 3 of 3 — fees, add-ons &amp; incidentals</p>
+      <div id="cartRows" style="margin-bottom:12px"></div>
+      <div class="optgrid" style="gap:8px">
+        <label class="opt sel" id="wpStd" style="cursor:pointer"><div><b><input type="radio" name="whopay" value="std" checked style="accent-color:var(--gold)"> Standard — I'm paying my own filing</b><span>Traditional. Dignified. Petty.</span></div><span class="op">—</span></label>
+        <label class="opt" id="wpFwd" style="cursor:pointer"><div><b><input type="radio" name="whopay" value="fwd" style="accent-color:var(--gold)"> Pay it forward — cover the accused's response</b><span>They're broke and we both know it. Covers their $3 response fee, so justice can't be dodged on a technicality.</span></div><span class="op">+$3</span></label>
+        <label class="opt" id="wpPin" style="cursor:pointer"><div><b><input type="checkbox" id="pinChk" style="accent-color:var(--gold)"> 📌 Pin this case atop the docket</b><span>24 hours of public prominence. They WILL see it.</span></div><span class="op">+$3</span></label>
+      </div>
+      <div class="sumrow"><span>Delivery</span><span>digital — nothing ships</span></div>
+      <div class="sumrow total"><span>Total due</span><span id="cartTotal">$3.00</span></div>
+      <div class="fld" style="margin-top:14px"><label>Email for the verdict broadcast</label><input id="fEmail" type="email" placeholder="you@justice.com"></div>
+      <div id="pp" style="margin:10px 0 4px"></div>
+      <div class="mnav"><button class="btn ghost" id="back2">← Proceedings</button><span></span></div>
+    </div>
+    <!-- CONFIRM -->
+    <div class="mstep" data-step="4" style="display:none">
+      <div class="confirm">
+        <div class="seal">⚖</div>
+        <h3 id="cTitle">Case #0142 filed</h3>
+        <p id="cBody">The defendant has been served a summons. The court will rule within 24 hours and the verdict will be broadcast to your email. Contempt of group chat has been noted.</p>
+        <div class="caselink" id="cLink">outoforder.court/served/x8k2</div>
+        <div class="stbtns" style="justify-content:center">
+          <button class="minibtn" id="cCopy" style="border-color:var(--ink);color:var(--ink)">Copy summons link</button>
+          <button class="minibtn solid" style="border-color:var(--ink)" id="cDone">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<canvas id="confetti"></canvas>
+
+<script>
+/* ═══════════ DATA ═══════════ */
+const VERDICTS = {
+  '0047': {
+    title:'THE UBER DISPUTE', head:'NATASHA v. RYAN — the unpaid fare',
+    img:'images/ryan.jpg', tag:'EXHIBIT A — THE DEFENDANT', audio:'audio/verdict-0047.mp3',
+    txt:'The court has reviewed Exhibit A: a payment request ignored for four days. Mister Ryan claims he was "about to send it." Mister Ryan was, quote, at the golf club. Posting.\n\nThe court finds FOR THE PLAINTIFF. Ryan: pay the $7 fare, plus a three-word apology containing no emojis. Interest begins… now.'
+  },
+  '0093': {
+    title:'THE CHRISTMAS MOVIE QUESTION', head:'THE PEOPLE v. DAVE\'S TAKE',
+    img:'images/dave.jpg', tag:'EXHIBIT B — THE DEFENDANT', audio:'audio/verdict-0093.mp3',
+    txt:'The defendant argued, publicly and without shame, that Die Hard is not a Christmas movie. The court reviewed the evidence: snow. An office Christmas party. Alan Rickman in a suit.\n\nTake it down, Dave. Post a retraction and apologize to the group chat. The court finds FOR THE PEOPLE — and for Christmas.'
+  },
+  '0052': {
+    title:'FELONIOUS TUNA THEFT', head:'CHLOE v. MISTER WHISKERS',
+    img:'images/cat.jpg', tag:'EXHIBIT F — THE FELON', audio:'audio/verdict-0052.mp3',
+    txt:'The defendant, a known tuna enthusiast, was found at the scene wearing the tuna. The defense argument — "the can opened itself" — has been rejected by physics.\n\nGuilty. Sentence: immediate belly rubs, reduced to time served, for the court is not a monster. The court finds FOR THE PLAINTIFF.'
+  }
+};
+const DOCKET = [
+  ['#0093','THE PEOPLE v. DAVE','"Die Hard is not a Christmas movie" — criminal take','out','VERDICT OUT','$3','images/dave.jpg'],
+  ['#0061','SARAH v. EMMA','"Just one fry" larceny — public jury voting now','del','JURY IS OUT','$5','images/fries.jpg'],
+  ['#0047','NATASHA v. RYAN','Failure to reimburse, Uber fare class','out','VERDICT OUT','$3','images/ryan.jpg'],
+  ['#0112','MAYA v. THE LOADSHEDDING ALIBI','"The wifi was off" during planned call — jury deliberates','del','JURY IS OUT','$5',null],
+  ['#0052','CHLOE v. MISTER WHISKERS','Felonious tuna theft, first degree','out','VERDICT OUT','$3','images/cat.jpg'],
+  ['#0088','ROOMIE v. ROOMIE','Thermostat warfare — setting it to 16° "as a joke"','srv','SUMMONS SERVED','$3',null],
+  ['#0104','LIAM v. EMMA\'S HOROSCOPE','Consulting Mercury in bad faith','del','FILED 4 MIN AGO','$3 pin',null],
+  ['#0039','THE GROUP CHAT v. TOM','Voice notes exceeding seven minutes','app','RESPONSE FILED — $3','$3',null]
+];
+const FAMOUS = [
+  ['#0001','THE PRECEDENT','"He who says \'you up?\' at 1am bears the emotional freight of the reply."'],
+  ['#0023','SISTER v. SISTER','Borrowing clothes without asking is a crime even — especially — between blood.'],
+  ['#0102','KAGISO v. THE ROOMMATE','Dishes "soaking" for 9 days constitutes abandonment under kitchen law.'],
+  ['#0077','THEOPLE v. PINEAPPLE GUY','The court rules pineapple lawful on pizza. Appeal rejected. Twice. $6.'],
+  ['#0055','AMA v. "5 MINUTES AWAY"','Any ETA given while still in the shower is perjury.'],
+  ['#0031','EVERYONE v. SPOILERS IN THE GROUP CHAT','24-hour spoiler amnesty is HEREBY LAW.']
+];
+const STUDIO_POOL = [
+  n=>`THE PEOPLE v. ${n}, ON THE CHARGE OF EXISTING WITH CONFIDENCE — Guilty as charged. Damages: one (1) heartfelt apology, payable immediately.`,
+  n=>`IN RE: THE LATE REPLIES OF ${n} — the "sorry, just seeing this" defense is rejected by this court. A 48-hour reply mandate is imposed.`,
+  n=>`${n} v. THEIR OWN BROWSER HISTORY — sealed. Permanently. The court, in its wisdom, shows mercy.`,
+  n=>`THE GROUP CHAT v. ${n}'s GYM SELFIES — permitted, capped at two (2) per week. Bench-press close-ups excluded.`
+];
+const FEEDLINES = [
+  '★★★★★ “Worth every cent. He paid me back within the hour.” — Lerato K.',
+  '★★★★★ “Better than therapy. Cheaper than the fries she stole.” — Anon',
+  '#0102 filed 2 min ago by @thandi_plz — dishes, again',
+  '★★★★★ “The jury found him guilty 11–1. The 1 was him.” — Palesa M.',
+  '#0114 filed just now — “said my fit was mid” (criminal take)',
+  '★★★★★ “Our group chat has a legal system now.” — J. van der M.'
+];
+
+/* ═══════════ UTIL ═══════════ */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+function copyText(t,btn){ (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{btn.textContent='Copied ✓';}).catch(()=>{btn.textContent=t;}); setTimeout(()=>btn.textContent=btn.dataset.label||(btn.dataset.label=btn.textContent),1600); }
+
+/* ═══════════ TICKER ═══════════ */
+(function(){const items='13,204 CASES FILED · LATEST: CHLOE v. MISTER WHISKERS — GUILTY · TOM\'S APPEAL DECLINED (AGAIN) · 17 FILINGS IN THE LAST HOUR · JURY SEATED IN FRYGATE · ';$('#tickerTxt').textContent=items+items;})();
+
+/* ═══════════ REVEALS ═══════════ */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}}),{threshold:.12});
+$$('.rv').forEach(el=>io.observe(el));
+
+/* ═══════════ VERDICT BROADCAST ═══════════ */
+let curCase='0047', typeTimer=null, curAudio=null;
+const tabsEl=$('#tabs');
+Object.keys(VERDICTS).forEach((id,i)=>{
+  const b=document.createElement('button');b.className='tab'+(i===0?' active':'');b.textContent='#'+id+' — '+VERDICTS[id].title.split(' ').slice(0,3).join(' ');
+  b.onclick=()=>{$$('.tab').forEach(t=>t.classList.remove('active'));b.classList.add('active');loadCase(id);};tabsEl.appendChild(b);
+});
+function loadCase(id){
+  curCase=id;const c=VERDICTS[id];
+  $('#vhCase').textContent='CASE #'+id;$('#vhTitle').textContent=c.title;$('#vHead').textContent=c.head;
+  $('#vImg').src=c.img;$('#vTag').textContent=c.tag;$('#vProg').style.width='0';
+  if(curAudio){curAudio.pause();curAudio=null;}
+  typeVerdict(c.txt,26);
+}
+function typeVerdict(txt,speed){
+  clearInterval(typeTimer);const el=$('#vTxt');el.innerHTML='<span class="cur"></span>';let i=0;
+  typeTimer=setInterval(()=>{
+    i+=2;el.innerHTML=txt.slice(0,i).replace(/\n/g,'<br>')+'<span class="cur"></span>';
+    $('#vProg').style.width=Math.min(100,i/txt.length*100)+'%';
+    if(i>=txt.length){clearInterval(typeTimer);el.innerHTML=txt.replace(/\n/g,'<br>');}
+  },speed);
+}
+$('#vReplay').onclick=()=>{
+  const c=VERDICTS[curCase];
+  if(curAudio){curAudio.pause();}
+  const a=new Audio(c.audio);curAudio=a;
+  let started=false;
+  a.addEventListener('playing',()=>{started=true;typeVerdict(c.txt,(a.duration*1000)/c.txt.length*0.96);});
+  a.addEventListener('error',()=>{typeVerdict(c.txt,26);});
+  a.play().catch(()=>typeVerdict(c.txt,26));
+  setTimeout(()=>{if(!started&&curAudio===a&&!a.currentTime){}},1200);
+};
+$('#watchBtn').onclick=()=>{document.querySelector('#verdicts').scrollIntoView({behavior:'smooth'});setTimeout(()=>$('#vReplay').click(),700);};
+loadCase('0047');
+
+/* ═══════════ DOCKET ═══════════ */
+(function(){
+  const wrap=$('#docketRows');
+  DOCKET.forEach(([num,t,c,st,stlabel,fee,img])=>{
+    const row=document.createElement('div');row.className='crow';
+    const face=img?`<div class="cface"><img src="${img}" alt=""></div>`:`<div class="cface init">${t.replace(/[^A-Z]/g,'').slice(0,2)}</div>`;
+    const statusHtml=(st==='del'&&fee.startsWith('$5'))?`<a href="vote.html?case=${num.replace('#','')}" class="cstatus st-${st}" style="text-decoration:none">🗳 ${stlabel} — VOTE</a>`:`<span class="cstatus st-${st}">${stlabel}</span>`;
+    row.innerHTML=`${face}<div class="ctitle"><b>${num} · ${t}</b><span>${c}</span></div>${statusHtml}<span class="cfee">${fee}</span>`;
+    wrap.appendChild(row);
+  });
+})();
+
+/* ═══════════ FAMOUS MARQUEE ═══════════ */
+(function(){
+  const m=$('#mqIn');
+  FAMOUS.concat(FAMOUS).forEach(([n,t,q])=>{
+    const d=document.createElement('div');d.className='rcard';
+    d.innerHTML=`<div class="rn">${n} · LANDMARK</div><b>${t}</b><p>“${q}”</p>`;
+    m.appendChild(d);
+  });
+})();
+
+/* ═══════════ STUDIO ═══════════ */
+const stImg=$('#stImg'); let stMode='county', stIdx=-1;
+function rollVerdict(){
+  const raw=($('#accName').value||'THE ACCUSED').trim().toUpperCase();
+  stIdx=(stIdx+1)%STUDIO_POOL.length;
+  $('#stVerdict').textContent='“'+STUDIO_POOL[stIdx](raw)+'”';
+  $('#stName').textContent='EXHIBIT A — '+raw;
+}
+rollVerdict();
+$('#stReroll').onclick=rollVerdict;
+$('#accName').addEventListener('input',()=>{ if(stIdx>=0) return; });
+$('#accName').addEventListener('change',()=>{ $('#stName').textContent='EXHIBIT A — '+($('#accName').value||'THE ACCUSED').trim().toUpperCase(); });
+function setMode(m){stMode=m;stImg.className=m;$('#mCounty').classList.toggle('active',m==='county');$('#mFederal').classList.toggle('active',m==='federal');}
+$('#mCounty').onclick=()=>setMode('county');
+$('#mFederal').onclick=()=>setMode('federal');
+$('#upInput').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();r.onload=ev=>{stImg.src=ev.target.result;rollVerdict();};r.readAsDataURL(f);
+});
+$('#stCopy').onclick=e=>copyText(($('#stVerdict').textContent||'').replace(/[“”]/g,'')+' — ruled at outoforder.court',e.target);
+$('#stFile').onclick=()=>{openModal('filing');};
+
+/* ═══════════ CART + CHECKOUT (PayPal JS SDK) ═══════════ */
+const PAYPAL_CLIENT_ID='AbpGUElCriSuzperlkf7j5M9J5SFcOyg_k3ZQmQ2GepCAAoU1gq7yKz_OR0PKSAccf5JQimLc7BeT9c-'; // Mcsmithandco — SANDBOX app. Safe for browser use (Client IDs are public by design). Swap for the Live app's ID at launch. Secret stays OFFLINE, never in code.
+const mback=$('#mback'); let step=1, tierPrice=3, tierLabel='Standard Filing';
+let feedTimer=null, sdkRequested=false;
+let CART=[];
+try{CART=JSON.parse(localStorage.getItem('oo_cart')||'[]');}catch(e){CART=[];}
+function saveCart(){try{localStorage.setItem('oo_cart',JSON.stringify(CART));}catch(e){} updateBadge();}
+function updateBadge(){const n=$('#cartN');if(n)n.textContent=CART.length;}
+function addItem(id,label,price){CART=CART.filter(i=>i.id!==id);CART.push({id,label,price:+price});saveCart();}
+function removeItem(id){CART=CART.filter(i=>i.id!==id);saveCart();renderCart();}
+function cartTotal(){return CART.reduce((s,i)=>s+i.price,0);}
+function renderCart(){
+  const w=$('#cartRows'); if(!w)return;
+  if(!CART.length){w.innerHTML='<div class="sumrow"><span>Cart is empty — file something petty.</span><span></span></div>';}
+  else{
+    w.innerHTML=CART.map(i=>`<div class="sumrow"><span>${i.label}</span><span>$${i.price.toFixed(2)} <button data-rm="${i.id}" title="strike from the record" style="background:none;border:0;color:var(--red);cursor:pointer;font-family:var(--mono);font-size:14px">✕</button></span></div>`).join('');
+    w.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>removeItem(b.dataset.rm));
+  }
+  $('#cartTotal').textContent='$'+cartTotal().toFixed(2);
+}
+function filingLabel(){const p=($('#fPlaintiff').value||'YOU').toUpperCase(),d=($('#fDefendant').value||'THEM').toUpperCase();return p+' v. '+d+' — '+tierLabel;}
+function openModal(tier){
+  mback.classList.add('open');document.body.style.overflow='hidden';
+  goStep(1);
+  if(tier==='jury')selectOpt(1);else if(tier==='appeal'){selectOpt(0);$('#fCharge').selectedIndex=7;$('#fFacts').value='APPEALING RULING #____ — the court was wrong and I have receipts.';}
+  else selectOpt(0);
+  feedTimer=setInterval(()=>{const f=$('#mFeed');if(f)f.textContent=FEEDLINES[Math.floor(Math.random()*FEEDLINES.length)];},2600);
+}
+function openCart(){openModal();if(CART.length){goStep(3);renderCart();ensurePay();}}
+function closeModal(){mback.classList.remove('open');document.body.style.overflow='';clearInterval(feedTimer);}
+$$('[data-open-modal]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();openModal(b.dataset.tier);}));
+const cartLnk=$('#cartLink'); if(cartLnk)cartLnk.addEventListener('click',e=>{e.preventDefault();openCart();});
+$$('[data-add]').forEach(b=>b.addEventListener('click',()=>{addItem(b.dataset.add,b.dataset.label,+b.dataset.price);openCart();}));
+$('#mclose').onclick=closeModal;
+mback.addEventListener('click',e=>{if(e.target===mback)closeModal();});
+function goStep(n){step=n;$$('.mstep').forEach(s=>s.style.display=(+s.dataset.step===n?'':'none'));if(n===3){renderCart();ensurePay();}}
+function selectOpt(i){$$('#optGrid .opt').forEach((o,j)=>o.classList.toggle('sel',i===j));const o=$$('#optGrid .opt')[i];if(!o)return;tierPrice=+o.dataset.price;tierLabel=o.dataset.label;}
+$$('#optGrid .opt').forEach((o,i)=>o.onclick=()=>selectOpt(i));
+$('#toStep2').onclick=()=>goStep(2);
+$('#back1').onclick=()=>goStep(1);
+$('#toStep3').onclick=()=>{addItem('filing',filingLabel(),tierPrice);goStep(3);};
+$('#back2').onclick=()=>goStep(2);
+$$('input[name=whopay]').forEach(r=>r.addEventListener('change',()=>{
+  const fwd=($('input[name=whopay]:checked')||{}).value==='fwd';
+  $('#wpStd').classList.toggle('sel',!fwd);$('#wpFwd').classList.toggle('sel',fwd);
+  if(fwd)addItem('defense','⚖ Response Fund — the accused\'s $3 reply is covered',3);
+  else{CART=CART.filter(i=>i.id!=='defense');saveCart();}
+  renderCart();
+}));
+const pinChk=$('#pinChk'); if(pinChk)pinChk.addEventListener('change',()=>{
+  if(pinChk.checked)addItem('pin','📌 Docket pin — 24h atop the docket',3);
+  else{CART=CART.filter(i=>i.id!=='pin');saveCart();}
+  renderCart();
+});
+function ensurePay(){
+  const slot=$('#pp'); if(!slot)return;
+  if(!PAYPAL_CLIENT_ID){
+    slot.innerHTML='<button class="btn gold" id="mockPay" style="width:100%;justify-content:center">⚖ Pay $'+cartTotal().toFixed(0)+' — demo checkout</button><p style="font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ink2);margin-top:8px;line-height:1.6">DEMO MODE — paste a PayPal Client ID at the top of the script in index.html and real PayPal Smart Buttons appear here.</p>';
+    const mp=$('#mockPay'); if(mp)mp.onclick=()=>{mp.textContent='⚖ Deliberating…';setTimeout(()=>checkoutSuccess('DEMO'),1300);};
+    return;
+  }
+  if(!window.paypal){
+    if(sdkRequested){slot.innerHTML='<p style="font-family:var(--mono);font-size:12px;color:var(--ink2)">Loading PayPal… (reopen the cart if it stalls)</p>';return;}
+    sdkRequested=true;
+    const s=document.createElement('script');
+    s.src='https://www.paypal.com/sdk/js?client-id='+PAYPAL_CLIENT_ID+'&components=buttons&currency=USD&intent=capture';
+    s.onload=()=>renderPayPal();
+    s.onerror=()=>{slot.innerHTML='<p style="font-family:var(--mono);font-size:12px;color:var(--red)">Could not reach PayPal — check your connection or Client ID.</p>';};
+    document.head.appendChild(s);
+    return;
+  }
+  renderPayPal();
+}
+function renderPayPal(){
+  const slot=$('#pp'); if(!slot||slot.dataset.live)return; slot.dataset.live='1';
+  paypal.Buttons({
+    style:{layout:'vertical',color:'gold',shape:'rect',label:'pay',height:46},
+    createOrder:(data,actions)=>actions.order.create({
+      intent:'CAPTURE',
+      purchase_units:[{
+        description:'Out of Order — petty justice, served',
+        amount:{value:cartTotal().toFixed(2),currency_code:'USD',breakdown:{item_total:{value:cartTotal().toFixed(2),currency_code:'USD'}}},
+        items:CART.map(i=>({name:i.label.replace(/[^\x20-\x7E]/g,'').slice(0,120),unit_amount:{value:i.price.toFixed(2),currency_code:'USD'},quantity:'1',category:(i.id.indexOf('merch')===0?'PHYSICAL_GOODS':'DIGITAL_GOODS')}))
+      }]
+    }),
+    onApprove:(data,actions)=>actions.order.capture().then(det=>checkoutSuccess(det.id||'PAID')),
+    onError:()=>{slot.insertAdjacentHTML('beforeend','<p style="font-family:var(--mono);font-size:12px;color:var(--red)">PayPal hiccup — try again.</p>');}
+  }).render('#pp');
+}
+function checkoutSuccess(ref){
+  const caseNo='#0'+(100+Math.floor(Math.random()*899));
+  const code=Math.random().toString(36).slice(2,6);
+  $('#cTitle').textContent='Case '+caseNo+' filed';
+  $('#cLink').textContent='outoforder.court/served/'+code;
+  const d=($('#fDefendant').value||'The accused');
+  let body=d.charAt(0).toUpperCase()+d.slice(1)+' has been served a summons link. The court will rule within 24 hours and broadcast the verdict to your email.';
+  if(CART.some(i=>i.id==='defense'))body+=' You pre-paid their defense — they literally cannot afford to object.';
+  if(ref&&ref!=='DEMO')body+=' (PayPal receipt: '+ref+')';
+  $('#cBody').textContent=body;
+  CART=[];saveCart();renderCart();
+  const pin=$('#pinChk'); if(pin)pin.checked=false;
+  const std=$('input[name=whopay][value=std]'); if(std){std.checked=true;$('#wpStd').classList.add('sel');$('#wpFwd').classList.remove('sel');}
+  goStep(4);confetti();
+}
+$('#cCopy').onclick=e=>copyText($('#cLink').textContent,e.target);
+$('#cDone').onclick=closeModal;
+updateBadge();
+
+/* ═══════════ CONFETTI ═══════════ */
+function confetti(){
+  const c=$('#confetti'),ctx=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;c.style.display='block';
+  const P=[];for(let i=0;i<160;i++)P.push({x:Math.random()*c.width,y:-20-Math.random()*c.height*.5,w:6+Math.random()*6,h:8+Math.random()*8,vy:2.5+Math.random()*3.5,vx:-1.5+Math.random()*3,r:Math.random()*Math.PI,vr:-.1+Math.random()*.2,col:['#d4af37','#b8860b','#1b1712','#f2ead8'][i%4]});
+  let t=0;(function f(){ctx.clearRect(0,0,c.width,c.height);t++;
+    P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.col;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();});
+    if(t<240)requestAnimationFrame(f);else c.style.display='none';})();
+}
+
+/* ═══════════ STICKY CTA ═══════════ */
+addEventListener('scroll',()=>{$('#stickyCta').style.display=scrollY>620?'flex':'none';});
+</script>
+</body>
+</html>
