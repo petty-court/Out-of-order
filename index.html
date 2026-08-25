@@ -728,7 +728,7 @@ $('#stCopy').onclick=e=>copyText(($('#stVerdict').textContent||'').replace(/[“
 $('#stFile').onclick=()=>{openModal('filing');};
 
 /* ═══════════ CART + CHECKOUT (PayPal JS SDK) ═══════════ */
-const PAYPAL_CLIENT_ID='BAAS-WQuirN4XCJfV_exv68NTMe-KdqyE5n2wthDeA6MkshAaMPPKxacCIQd3cEMMT9uK6ROuKgQptyHMU' // Mcsmithandco — SANDBOX app. Safe for browser use (Client IDs are public by design). Swap for the Live app's ID at launch. Secret stays OFFLINE, never in code
+const PAYPAL_CLIENT_ID='BAAS-WQuirN4XCJfV_exv68NTMe-KdqyE5n2wthDeA6MkshAaMPPKxacCIQd3cEMMT9uK6ROuKgQptyHMU'; // Mcsmithandco — LIVE app (real money). Client IDs are public by design; the secret stays offline, never in this codebase.
 const mback=$('#mback'); let step=1, tierPrice=3, tierLabel='Standard Filing';
 let feedTimer=null, sdkRequested=false;
 let CART=[];
