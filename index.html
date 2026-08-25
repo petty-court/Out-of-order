@@ -8,9 +8,9 @@
 <meta property="og:title" content="OUT OF ORDER — Sue someone for $3">
 <meta property="og:description" content="The internet's court of petty disputes. Judge verdicts FREE, the public jury costs $5. The accused pays $3 to respond. Justice, but make it petty.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="images/judge-avatar.png">
+<meta property="og:image" content="Images/judge-avatar.png">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
+<link rel="icon" href="data:Image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
 <style>
 :root{
   --paper:#f2ead8; --paper2:#e9dfc8; --ink:#1b1712; --ink2:#3a332a;
@@ -296,7 +296,7 @@ footer a:hover{color:var(--gold2)}
     </div>
     <div class="judgebox rv on">
       <div class="medal">
-        <img src="images/judge-avatar.png" alt="Judge Ronald Wapner III" id="judgeImg">
+        <img src="Images/judge-avatar.png" alt="Judge Ronald Wapner III" id="judgeImg">
         <svg class="ring" viewBox="0 0 200 200"><defs><path id="circ" d="M100,100 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"/></defs><text><textPath href="#circ">JUDGE RONALD WAPNER III · PRESIDING · HONESTLY, IT'S AN HONOR ·</textPath></text></svg>
       </div>
       <div class="plaque">41 YEARS OF UNQUALIFIED AUTHORITY</div>
@@ -319,7 +319,7 @@ footer a:hover{color:var(--gold2)}
       </div>
       <div class="vstage">
         <div class="exhibit">
-          <div class="ph"><img id="vImg" src="images/ryan.jpg" alt="Exhibit A"></div>
+          <div class="ph"><img id="vImg" src="Images/ryan.jpg" alt="Exhibit A"></div>
           <div class="tag" id="vTag">EXHIBIT A — THE DEFENDANT</div>
         </div>
         <div class="vbody">
@@ -374,7 +374,7 @@ footer a:hover{color:var(--gold2)}
           <button id="mFederal">Federal Gild</button>
         </div>
         <div class="stagecard">
-          <div class="ph"><img id="stImg" src="images/fries.jpg" alt="Exhibit" class="county"><div class="sealtag">⚖</div></div>
+          <div class="ph"><img id="stImg" src="Images/fries.jpg" alt="Exhibit" class="county"><div class="sealtag">⚖</div></div>
           <div class="stname" id="stName">EXHIBIT A — EMMA · CAUGHT WITH THE FRY</div>
           <div class="stverdict" id="stVerdict"></div>
           <div class="stbtns">
@@ -590,26 +590,26 @@ footer a:hover{color:var(--gold2)}
 const VERDICTS = {
   '0047': {
     title:'THE UBER DISPUTE', head:'NATASHA v. RYAN — the unpaid fare',
-    img:'images/ryan.jpg', tag:'EXHIBIT A — THE DEFENDANT', audio:'audio/verdict-0047.mp3',
+    img:'Images/ryan.jpg', tag:'EXHIBIT A — THE DEFENDANT', audio:'audio/verdict-0047.mp3',
     txt:'The court has reviewed Exhibit A: a payment request ignored for four days. Mister Ryan claims he was "about to send it." Mister Ryan was, quote, at the golf club. Posting.\n\nThe court finds FOR THE PLAINTIFF. Ryan: pay the $7 fare, plus a three-word apology containing no emojis. Interest begins… now.'
   },
   '0093': {
     title:'THE CHRISTMAS MOVIE QUESTION', head:'THE PEOPLE v. DAVE\'S TAKE',
-    img:'images/dave.jpg', tag:'EXHIBIT B — THE DEFENDANT', audio:'audio/verdict-0093.mp3',
+    img:'Images/dave.jpg', tag:'EXHIBIT B — THE DEFENDANT', audio:'audio/verdict-0093.mp3',
     txt:'The defendant argued, publicly and without shame, that Die Hard is not a Christmas movie. The court reviewed the evidence: snow. An office Christmas party. Alan Rickman in a suit.\n\nTake it down, Dave. Post a retraction and apologize to the group chat. The court finds FOR THE PEOPLE — and for Christmas.'
   },
   '0052': {
     title:'FELONIOUS TUNA THEFT', head:'CHLOE v. MISTER WHISKERS',
-    img:'images/cat.jpg', tag:'EXHIBIT F — THE FELON', audio:'audio/verdict-0052.mp3',
+    img:'Images/cat.jpg', tag:'EXHIBIT F — THE FELON', audio:'audio/verdict-0052.mp3',
     txt:'The defendant, a known tuna enthusiast, was found at the scene wearing the tuna. The defense argument — "the can opened itself" — has been rejected by physics.\n\nGuilty. Sentence: immediate belly rubs, reduced to time served, for the court is not a monster. The court finds FOR THE PLAINTIFF.'
   }
 };
 const DOCKET = [
-  ['#0093','THE PEOPLE v. DAVE','"Die Hard is not a Christmas movie" — criminal take','out','VERDICT OUT','$3','images/dave.jpg'],
-  ['#0061','SARAH v. EMMA','"Just one fry" larceny — public jury voting now','del','JURY IS OUT','$5','images/fries.jpg'],
-  ['#0047','NATASHA v. RYAN','Failure to reimburse, Uber fare class','out','VERDICT OUT','$3','images/ryan.jpg'],
+  ['#0093','THE PEOPLE v. DAVE','"Die Hard is not a Christmas movie" — criminal take','out','VERDICT OUT','$3','Images/dave.jpg'],
+  ['#0061','SARAH v. EMMA','"Just one fry" larceny — public jury voting now','del','JURY IS OUT','$5','Images/fries.jpg'],
+  ['#0047','NATASHA v. RYAN','Failure to reimburse, Uber fare class','out','VERDICT OUT','$3','Images/ryan.jpg'],
   ['#0112','MAYA v. THE LOADSHEDDING ALIBI','"The wifi was off" during planned call — jury deliberates','del','JURY IS OUT','$5',null],
-  ['#0052','CHLOE v. MISTER WHISKERS','Felonious tuna theft, first degree','out','VERDICT OUT','$3','images/cat.jpg'],
+  ['#0052','CHLOE v. MISTER WHISKERS','Felonious tuna theft, first degree','out','VERDICT OUT','$3','Images/cat.jpg'],
   ['#0088','ROOMIE v. ROOMIE','Thermostat warfare — setting it to 16° "as a joke"','srv','SUMMONS SERVED','$3',null],
   ['#0104','LIAM v. EMMA\'S HOROSCOPE','Consulting Mercury in bad faith','del','FILED 4 MIN AGO','$3 pin',null],
   ['#0039','THE GROUP CHAT v. TOM','Voice notes exceeding seven minutes','app','RESPONSE FILED — $3','$3',null]
