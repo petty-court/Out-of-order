@@ -2,7 +2,7 @@
 
 > **File suit over life's smallest injustices. $3 per filing. Judge verdicts FREE. The public jury costs $5.**
 
-OUT OF ORDER sells small, dramatic legal proceedings to the extremely online. Unpaid Uber fares, roommate food crimes, criminal movie takes: plaintiffs pay **$3 to sue**, a Judge-Judy-style bench delivers a **FREE voiced verdict video** plus an engraved digital verdict card, and the defendant is served a summons link. The accused pays **$3 to respond**. Losers appeal ($3). Losers counter-sue ($3). **Conflict is the revenue engine.**
+OUT OF ORDER sells small, dramatic legal proceedings to the extremely online. Unpaid Uber fares, roommate food crimes, criminal movie takes: plaintiffs pay **$3 to sue**, a Judge-Judy-style bench delivers a **FREE voiced verdict video** plus an engraved digital verdict card, and the defendant is served a summons link. The accused pays **$3 to respond**. Losers appeal ($3). Losers counter-sue ($3).
 
 ## Why this wins (the viral mechanics, engineered in)
 
@@ -22,16 +22,12 @@ OUT OF ORDER sells small, dramatic legal proceedings to the extremely online. Un
 - **Jury Trial** — $5 (the public becomes the jury for a day: vote-by-link, tally broadcast)
 - **Appeals & counter-suits** — $3 each, recurring per dispute
 - **Make It Famous** — $3 docket pin
-- **Merch** — GUILTY tee $24 / OBJECTION! cap $19 / Framed Verdict $34 (print-on-demand, ~55% margin)
-
-Target: AOV ~$7 (filing + response + jury upgrades per dispute). Every free judge verdict doubles as content marketing — COGS ≈ $1/case (TTS + render + email).
+- **Merch** — GUILTY tee $24 / OBJECTION! cap $19 / Framed Verdict $34 (print-on-demand, 
+Target: AOV ~$7 (filing + response + jury upgrades per dispute). 
 
 ## Payments — live wiring (PayPal JavaScript SDK)
 
-Checkout runs on PayPal **Smart Buttons** (JS SDK, no backend required): the SDK loads from `paypal.com` at checkout with the app's public **Client ID** (`PAYPAL_CLIENT_ID` in `index.html`), creates + captures an order client-side with line items from the cart, then issues the case number. The app **Secret is never used or stored** in the codebase — keep it offline; if you ever add server-side capture/verification (recommended at scale), that's where it belongs, behind an endpoint.
-
-- Current app: `Mcsmithandco` — **LIVE** (real money, as of launch). Client ID configured in `index.html`. The old sandbox app still exists for safe testing — use it for any experiments, never for production.
-- Payouts route to the PayPal account that owns the app; in SA, withdraw via FNB. Currency: USD.
+Checkout runs on PayPal **Smart Buttons** (JS SDK, no backend required): the SDK loads from `paypal.com` at checkout with the app's public **Client ID** The app **Secret is never used or stored** in the codebase — keep it offline; if you ever add server-side capture/verification (recommended at scale), that's where it belongs, behind an endpoint.
 
 ## What's real vs. mocked in this preview
 
@@ -43,7 +39,7 @@ Checkout runs on PayPal **Smart Buttons** (JS SDK, no backend required): the SDK
 3. ~~Public jury mechanics~~ → ✅ **BUILT** — `vote.html?case=XXXX`: vote-by-link jury page with live tally bar, real countdown, rolling juror commentary, verdict-at-zero state, and a downloadable **Juror Badge** share card (canvas-rendered). Demo ledger is client-side persistence; swap the `oo_tally_*` localStorage calls for a serverless tally endpoint at launch — the page contract is already URL-parameterized per case.
 4. **Fulfillment** → Printful/Prodigi for merch + framed verdicts. Print-on-demand, zero inventory.
 
-## Launch playbook (30 days)
+## Launch playbook 
 
 - **Week 1:** Post verdict videos daily to TikTok/Reels/Shorts. Format: 3s cold open on the photo ("EXHIBIT A"), verdict readout, guilty stamp. Pin "file your case" link.
 - **Week 2:** Seed 20 free cases in big group chats/campuses — the summons mechanic does distribution for you.
