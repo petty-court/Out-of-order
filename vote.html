@@ -8,9 +8,9 @@
 <meta property="og:title" content="🗳 JURY DUTY — you have been summoned">
 <meta property="og:description" content="The internet is the jury for a day. Read the evidence, cast your vote, mint your Juror Badge. One vote per juror.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="images/fries.jpg">
+<meta property="og:image" content="Images/fries.jpg">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗳️</text></svg>">
+<link rel="icon" href="data:Images/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗳️</text></svg>">
 <style>
 :root{
   --paper:#f2ead8; --paper2:#e9dfc8; --ink:#1b1712; --ink2:#3a332a;
@@ -176,7 +176,7 @@ footer a{color:#cfc4a6;text-decoration:none}
       <div class="side pro rv">
         <div class="sh"><span>THE PROSECUTION</span><span id="pName">SARAH</span></div>
         <div class="sb">
-          <div class="exhibit-ph" id="proPh"><img id="proImg" src="images/fries.jpg" alt="Exhibit A"></div>
+          <div class="exhibit-ph" id="proPh"><img id="proImg" src="Images/fries.jpg" alt="Exhibit A"></div>
           <p id="pStatement">“Your honor, she said she wasn't hungry. Then she ate eleven of my fries. Eleven. I counted. The waiter counted.”</p>
           <div id="pEvidence"></div>
         </div>
@@ -242,7 +242,7 @@ footer a{color:#cfc4a6;text-decoration:none}
 const CASES={
  '0061':{
    no:'#0061', title:'SARAH v. EMMA', charge:'“Just one fry” larceny, first degree',
-   pName:'SARAH', dName:'EMMA — represented by audacity', img:'images/fries.jpg',
+   pName:'SARAH', dName:'EMMA — represented by audacity', img:'Images/fries.jpg',
    pStatement:'“Your honor, she said she wasn\'t hungry. Then she ate eleven of my fries. Eleven. I counted. The waiter counted.”',
    pEvidence:[['A','The fry, mid-theft (photographic evidence, above)'],['B','Text message: “im literally not even hungry” — 19:02'],['C','Ketchup forensics: double-dipping confirmed']],
    dStatement:'“The defendant pleads the Communal Fry Doctrine, and notes the plaintiff ‘always orders too many anyway.’ She has offered one (1) fry in restitution.”',
@@ -251,7 +251,7 @@ const CASES={
  },
  '0112':{
    no:'#0112', title:'MAYA v. THE LOADSHEDDING ALIBI', charge:'Claiming “the wifi was off” during a planned video call',
-   pName:'MAYA', dName:'THE ACCUSED — represented by bad signal', img:'images/ryan.jpg',
+   pName:'MAYA', dName:'THE ACCUSED — represented by bad signal', img:'Images/ryan.jpg',
    pStatement:'“He missed our anniversary video call. Stage 4 ended at 20:00. His ‘sorry, just saw this’ arrived at 00:41 — from a device. With wifi.”',
    pEvidence:[['A','Screenshot: accused online at 21:17 during “blackout”'],['B','Municipal schedule: stage ends 20:00 sharp'],['C','Chat log shows “typing…” twice before the “crash”']],
    dStatement:'“The defense cites a phone at 2% battery. The court notes power banks exist, are sold widely, and are frequently on special.”',
@@ -389,7 +389,7 @@ $('#bDownload').onclick=()=>{
     const t=total(),pg=Math.round(T.g/t*100);
     x.fillText('TALLY AT TIME OF SERVICE: '+pg+'% GUILTY / '+(100-pg)+'% NOT GUILTY',540,880);
     x.fillStyle='#8a6d1f';x.font='26px Courier New';x.fillText('outoforder.court — the internet is the jury',540,970);
-    const a=document.createElement('a');a.download='juror-badge-'+id+'.png';a.href=cv.toDataURL('image/png');a.click();
+    const a=document.createElement('a');a.download='juror-badge-'+id+'.png';a.href=cv.toDataURL('Images/png');a.click();
   }
 };
 /* confetti */
